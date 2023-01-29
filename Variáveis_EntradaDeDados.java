@@ -27,11 +27,11 @@ public class Variáveis_EntradaDeDados
 		System.out.println("Olá "+nomePessoa+" Seja muito bem vindo(a)!!");
 		// no println() não podemos usar vírgulas para separar as strings das variáveis
 		System.out.printf("Olá %s Seja muito bem vindo(a)!!\n", nomePessoa);
-		System.out.printf("Preciso de uma xícara de %s\n", xicara);
+		System.out.printf("Preciso de uma xícara de %s.\n", xicara);
 		/* mas podemos usar o prinf(), já que se trata de uma formatação. Da mesma forma em Python
 		 * %s é s de string acredito que conhecem esse tipo de formatação
 		 */
-		System.out.printf("%s você quer um copo de %s\n", nomePessoa, xicara);
+		System.out.printf("%s você quer um copo de %s?\n", nomePessoa, xicara);
 		
 	}
 }
