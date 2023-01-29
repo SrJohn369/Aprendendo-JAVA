@@ -13,6 +13,7 @@ public class Variáveis_EntradaDeDados
 		 * e in para entrada de dados input. O nome input na criação do objeto é opcional, eu João,
 		 * prefiro assim, até mesmo por causa do Python, me acostumei com essa palavra significando
 		 * entrada*/
+		
 		String nomePessoa;
 		/* Então criamos uma variável que vai receber o nome da pessoa. Não preciso explicar o que é
 		 * uma variável né?!kkkk, mas tem algo aqui muito diferente de Python, aqui você tem que declarar
@@ -24,8 +25,10 @@ public class Variáveis_EntradaDeDados
 		/* Agora atribuímos o que for digitado à variável nomePessoa por meio do objeto que a gente criou
 		   usando o método next(), usariamos o método nextLine() caso houvesse uma quebra de linha no print*/
 		nomePessoa = input.next();
+		
 		System.out.println("Olá "+nomePessoa+" Seja muito bem vindo(a)!!");
 		// no println() não podemos usar vírgulas para separar as strings das variáveis
+		
 		System.out.printf("Olá %s Seja muito bem vindo(a)!!\n", nomePessoa);
 		System.out.printf("Preciso de uma xícara de %s.\n", xicara);
 		/* mas podemos usar o prinf(), já que se trata de uma formatação. Da mesma forma em Python
