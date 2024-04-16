@@ -1,6 +1,3 @@
-package noções_básicas;
-/* primeiro vamos importar a classe Scanner pra receber as entradas, que a gente conhece em Python
- * como input. Se a gente quiser receber dados é obrigatório importar essa classe*/
 import java.util.Scanner;
 
 public class Variáveis_EntradaDeDados 
