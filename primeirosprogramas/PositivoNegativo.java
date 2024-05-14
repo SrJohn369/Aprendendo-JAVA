@@ -2,7 +2,7 @@
 Se o número for positivo, exiba "Número positivo", caso contrário, 
 exiba "Número negativo". */
 
-package PrimeirosPrograms;
+package primeiros.programs;
 
 import java.util.Scanner;
 

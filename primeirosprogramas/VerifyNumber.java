@@ -3,7 +3,7 @@ Compare os números e imprima uma mensagem indicando se
 são iguais, diferentes, o primeiro é maior ou
 o segundo é maior. */
 
-package PrimeirosPrograms;
+package primeiros.programs;
 
 import java.util.Scanner;;
 

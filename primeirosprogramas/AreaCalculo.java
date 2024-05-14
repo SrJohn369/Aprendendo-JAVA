@@ -3,7 +3,7 @@
 Solicite a escolha do usuário e realize o cálculo da área com 
 base na opção selecionada. */
 
-package PrimeirosPrograms;
+package primeirosprogramas;
 
 import java.util.Scanner;
 

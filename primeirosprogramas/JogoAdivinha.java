@@ -6,7 +6,7 @@
  * 
  */
 
-package PrimeirosPrograms;
+package primeiros.programs;
 
 import java.util.Random;
 import java.util.Scanner;

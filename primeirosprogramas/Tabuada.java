@@ -1,7 +1,7 @@
 /*Crie um programa que solicite ao usuário um número e 
 exiba a tabuada desse número de 1 a 10. */
 
-package PrimeirosPrograms;
+package primeiros.programs;
 
 import java.util.Scanner;
 
