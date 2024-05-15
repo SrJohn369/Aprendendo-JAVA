@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -43,7 +44,7 @@ public class CartaoCredito {
     }
     
     // MÉTODOS =================
-    public boolean compraValida(Compra compra) {
+    private boolean compraValida(Compra compra) {
         if (this.saldo > compra.getValor()) {
             this.compras.add(compra);
             this.saldo -= compra.getValor();
@@ -51,5 +52,34 @@ public class CartaoCredito {
             return true;
         }
         return false;
+    }
+
+    public void comprar(Compra compra) {
+        if (compraValida(compra)) {
+            System.out.println(
+                "\n=== COMPRA REALIZADA COM SUCESSO! ===\n"
+                + "\tProduto:\t" + compra.getProduto()
+                + "\n\tValor:\t\tR$ " + compra.getValor()
+                + "\n========================================"
+            );        
+        } else {
+            System.out.printf(
+                "\n=== COMPRA NEGADA! =====\n"
+                + "SALDO INSUFICIENTE\n"
+                + "SALDO ATUAL: R$ " + "%.2f"
+                + "\n========================\n", this.saldo
+            );
+        }
+    }
+
+    public String listarCompras() {
+        Collections.sort(compras);
+        String tabelaDados = "Produto\t\tValor(R$)\n";
+
+        for (Compra compra: this.compras) {
+            tabelaDados += compra.getProduto() + "\t\t" + compra.getValor() + "\n";
+        }
+
+        return tabelaDados;
     }
 }
