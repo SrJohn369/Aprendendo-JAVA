@@ -7,16 +7,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.screematchsemweb.service.ConsumoApi;
 
 @SpringBootApplication
-public class ScreematchsemwebApplication implements CommandLineRunner{
+public class Main implements CommandLineRunner{
 
 	public static void main(String[] args) {
-		SpringApplication.run(ScreematchsemwebApplication.class, args);
+		SpringApplication.run(Main.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+		// instânciar a classe de consumo
 		var consumoApi = new ConsumoApi();
-		var json = consumoApi.obterDados(null);
+		// passamos o endereço
+		var json = consumoApi.obterDados("http://www.omdbapi.com/?s=blade&apikey=443ba9e4");
 		System.out.println(json);
 	}
 
