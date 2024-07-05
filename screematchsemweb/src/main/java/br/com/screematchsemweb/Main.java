@@ -4,7 +4,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.screematchsemweb.model.DadosSerie;
 import br.com.screematchsemweb.service.ConsumoApi;
+import br.com.screematchsemweb.service.ConverteDados;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner{
@@ -18,8 +20,12 @@ public class Main implements CommandLineRunner{
 		// instânciar a classe de consumo
 		var consumoApi = new ConsumoApi();
 		// passamos o endereço
-		var json = consumoApi.obterDados("http://www.omdbapi.com/?s=blade&apikey=443ba9e4");
+		var json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&apikey=443ba9e4");
 		System.out.println(json);
+		System.out.println("\n\n\n\n");
+		ConverteDados conversor = new ConverteDados();
+		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+		System.out.println(dados);
 	}
 
 }
