@@ -1,11 +1,15 @@
 package br.com.screematchsemweb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.screematchsemweb.model.DadosEpisodio;
 import br.com.screematchsemweb.model.DadosSerie;
+import br.com.screematchsemweb.model.DadosTemporada;
 import br.com.screematchsemweb.service.ConsumoApi;
 import br.com.screematchsemweb.service.ConverteDados;
 
@@ -32,6 +36,15 @@ public class Main implements CommandLineRunner{
 		json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season=1&Episode=1&apikey=443ba9e4");
 		DadosEpisodio ddEpisodio = conversor.obterDados(json, DadosEpisodio.class);
 		System.out.println(ddEpisodio);
+
+		List<DadosTemporada> temporadas = new ArrayList<>();
+
+		for (int i=1; i<=dados.totalTemporadas(); i++) {
+			json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season"+i+"&apikey=443ba9e4");
+			DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
+			temporadas.add(dadosTemporada);
+		}
+		temporadas.forEach(System.out::println);
 	}
 
 }
