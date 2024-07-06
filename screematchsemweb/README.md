@@ -119,3 +119,19 @@ A URI é composta por diferentes partes, como o
 esquema (http, https, ftp, etc.), o nome de domínio, 
 a porta, o caminho do recurso, etc.
 ```
+
+## Record DadosSerie
+### CÓDIGO:
+```java
+// record porque vamos apenas represendar os dados
+@JsonIgnoreProperties(ignoreUnknown = true) // usado para ignorar tudo que não estiver nos parametros da record
+public record DadosSerie(
+        @JsonAlias("Title") String titulo,
+        @JsonAlias("totalSeasons") Integer totalTemporadas,
+        @JsonAlias("imdbRating") String avaliacao) {}
+
+// @JsonAlias é usado aqui para indicar que "Title" no json é para ser interpretado para titulo
+// relacionando 
+/*Estudar @JsonAlias @JsonProperty */
+```
+OBS: Olhar a documentação 

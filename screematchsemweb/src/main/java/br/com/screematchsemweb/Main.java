@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.screematchsemweb.model.DadosEpisodio;
 import br.com.screematchsemweb.model.DadosSerie;
 import br.com.screematchsemweb.service.ConsumoApi;
 import br.com.screematchsemweb.service.ConverteDados;
@@ -26,6 +27,11 @@ public class Main implements CommandLineRunner{
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 		System.out.println(dados);
+
+		System.out.println("\n\n\n\n");
+		json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season=1&Episode=1&apikey=443ba9e4");
+		DadosEpisodio ddEpisodio = conversor.obterDados(json, DadosEpisodio.class);
+		System.out.println(ddEpisodio);
 	}
 
 }
