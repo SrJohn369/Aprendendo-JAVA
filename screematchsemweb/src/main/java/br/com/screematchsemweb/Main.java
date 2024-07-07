@@ -33,14 +33,14 @@ public class Main implements CommandLineRunner{
 		System.out.println(dados);
 
 		System.out.println("\n\n\n\n");
-		json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season=1&Episode=1&apikey=443ba9e4");
+		json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&season=1&episode=1&apikey=443ba9e4");
 		DadosEpisodio ddEpisodio = conversor.obterDados(json, DadosEpisodio.class);
 		System.out.println(ddEpisodio);
 
 		List<DadosTemporada> temporadas = new ArrayList<>();
 
 		for (int i=1; i<=dados.totalTemporadas(); i++) {
-			json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&Season"+i+"&apikey=443ba9e4");
+			json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&season="+i+"&apikey=443ba9e4");
 			DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
 			temporadas.add(dadosTemporada);
 		}
