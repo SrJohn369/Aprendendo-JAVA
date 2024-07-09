@@ -27,13 +27,22 @@ public class Principal {
         System.out.println(dados);
 
         List<DadosTemporada> temporadas = new ArrayList<>();
-
+        //Coleta dados de todas as temporadas
 		for (int i=1; i<=dados.totalTemporadas(); i++) {
 			json = consumo.obterDados(ENDERECO+nomeSerie.replace(" ", "+")+"&season="+i+API_KEY);
 			DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
 			temporadas.add(dadosTemporada);
 		}
-		temporadas.forEach(System.out::println);
+		// temporadas.forEach(System.out::println);
+        //percorre cada temporada
+        temporadas.forEach( 
+            // irá percorrer cada episodio dentro da temporada
+            t -> t.episodios().forEach(
+                // irá percorrer cada titulo dentro do episodio
+                e -> System.out.println(e.titulo())
+            )
+        );
+        // t -> está funcionando como uma função anônima
 
     }
 }

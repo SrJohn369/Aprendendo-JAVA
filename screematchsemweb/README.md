@@ -135,3 +135,25 @@ public record DadosSerie(
 /*Estudar @JsonAlias @JsonProperty */
 ```
 OBS: Olhar a documentação 
+
+## Classe Principal
+### função exibe menu
+#### CODIGO
+```java
+    temporadas.forEach(System.out::println);
+    //percorre cada temporada
+    temporadas.forEach( 
+        // irá percorrer cada episodio dentro da temporada
+        t -> t.episodios().forEach(
+            // irá percorrer cada titulo dentro do episodio
+            e -> System.out.println(e.titulo())
+        )
+    );
+    // t -> está funcionando como uma função anônima
+```
+
+#### PERGUNTAS:
++ Como funciona de fato este forEach e quando foi introduzido no Java?
++ Como funciona essa sintaxe: temporadas.forEach(`System.out::println`); ?
+
+#### RESPOSTAS
