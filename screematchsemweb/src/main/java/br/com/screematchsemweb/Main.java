@@ -7,11 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.screematchsemweb.model.DadosEpisodio;
-import br.com.screematchsemweb.model.DadosSerie;
-import br.com.screematchsemweb.model.DadosTemporada;
-import br.com.screematchsemweb.service.ConsumoApi;
-import br.com.screematchsemweb.service.ConverteDados;
+import br.com.screematchsemweb.principal.Principal;
+
 
 @SpringBootApplication
 public class Main implements CommandLineRunner{
@@ -22,29 +19,8 @@ public class Main implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// instânciar a classe de consumo
-		var consumoApi = new ConsumoApi();
-		// passamos o endereço
-		var json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&apikey=443ba9e4");
-		System.out.println(json);
-		System.out.println("\n\n\n\n");
-		ConverteDados conversor = new ConverteDados();
-		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-		System.out.println(dados);
-
-		System.out.println("\n\n\n\n");
-		json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&season=1&episode=1&apikey=443ba9e4");
-		DadosEpisodio ddEpisodio = conversor.obterDados(json, DadosEpisodio.class);
-		System.out.println(ddEpisodio);
-
-		List<DadosTemporada> temporadas = new ArrayList<>();
-
-		for (int i=1; i<=dados.totalTemporadas(); i++) {
-			json = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&season="+i+"&apikey=443ba9e4");
-			DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
-			temporadas.add(dadosTemporada);
-		}
-		temporadas.forEach(System.out::println);
+		Principal principal = new Principal();
+		principal.exibeMenu();
 	}
 
 }
