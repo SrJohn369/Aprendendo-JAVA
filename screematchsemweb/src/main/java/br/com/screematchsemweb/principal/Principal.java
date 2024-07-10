@@ -1,9 +1,12 @@
 package br.com.screematchsemweb.principal;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+import br.com.screematchsemweb.model.DadosEpisodio;
 import br.com.screematchsemweb.model.DadosSerie;
 import br.com.screematchsemweb.model.DadosTemporada;
 import br.com.screematchsemweb.service.ConsumoApi;
@@ -44,5 +47,17 @@ public class Principal {
         );
         // t -> está funcionando como uma função anônima
 
+        // ===============================================
+        // Criando uma lista com todos os episodios de todas as temporadas
+        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
+        .flatMap(t -> t.episodios().stream())
+        .collect(Collectors.toList());
+
+        // Filtrando TOP 5 episodios
+        dadosEpisodios.stream()
+        .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+        .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+        .limit(5)
+        .forEach(System.out::println);
     }
 }

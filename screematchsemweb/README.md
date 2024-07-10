@@ -153,7 +153,123 @@ OBS: Olhar a documentação
 ```
 
 #### PERGUNTAS:
++ O que são funções Lambda?
 + Como funciona de fato este forEach e quando foi introduzido no Java?
 + Como funciona essa sintaxe: temporadas.forEach(`System.out::println`); ?
++ O que é Streams?
 
 #### RESPOSTAS
+```txt
+O que são funções Lambda?
+
+As funções Lambda - chamadas de funções anônimas -
+são uma maneira de definir funções que são frequentemente 
+usadas uma única vez, direto no local onde elas serão usadas.
+
+```
+---
+```txt
+Como funciona de fato este forEach e quando foi introduzido no Java?
+
+
+Em Java, uma função lambda é definida da seguinte maneira:
+(argumentos) -> { corpo-da-função }
+
+Por exemplo, podemos definir uma função lambda que 
+adicione dois números da seguinte maneira:
+(a, b) -> { return a + b; }
+
+Exemplos de uso de funções Lambda:
+
+List<Integer> lista = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+for(Integer i: lista) {
+  if(i % 2 == 0) {
+    System.out.println(i);
+  }
+}
+--------------------------------------------
+
+podemos simplificar esse código:
+
+List<Integer> lista = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+lista.stream().filter(i -> i % 2 == 0).forEach(System.out::println);
+```  
+
+---  
+
+```
+O que é Streams?
+
+========
+As streams são uma nova forma de trabalhar com coleções 
+de dados no Java, introduzidas a partir do Java 8. 
+Elas permitem realizar operações de forma mais eficiente 
+e concisa, utilizando uma abordagem funcional.
+
+Uma stream é uma sequência de elementos que pode ser 
+processada em paralelo ou em série.
+
+Ela pode ser criada a partir de uma coleção, 
+um array, um arquivo, entre outros.
+
+As operações intermediárias são aquelas que podem 
+ser aplicadas em uma stream e retornam uma nova 
+stream como resultado. Essas operações não são 
+executadas imediatamente, mas apenas quando uma 
+operação final é chamada.
+
+OPERAÇÕES INTERMEDIÁRIAS:
++ Filter: permite filtrar os elementos da stream com base 
+em uma condição. Exemplo:
+List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+List<Integer> numerosPares = numeros.stream()
+                                   .filter(n -> n % 2 == 0)
+                                   .collect(Collectors.toList());
+
+System.out.println(numerosPares); // Output: [2, 4, 6, 8, 10]
+
+=======
++ Map: permite transformar cada elemento da stream em outro tipo de dado. 
+Exemplo:
+
+List<String> palavras = Arrays.asList("Java", "Stream", "Operações", "Intermediárias");
+
+List<Integer> tamanhos = palavras.stream()
+                                .map(s -> s.length())
+                                .collect(Collectors.toList());
+
+System.out.println(tamanhos); // Output: [4, 6, 11, 17]
+
+=======
+OPERAÇÕES FINAIS
+As operações finais são aquelas que encerram a stream e retornam um resultado concreto.
+Algumas operações finais comuns são o forEach, collect e count.
+Exemplos:
+
++ ForEach: permite executar uma ação em cada elemento da stream.
+List<String> nomes = Arrays.asList("João", "Maria", "Pedro", "Ana");
+
+nomes.stream()
+     .forEach(nome -> System.out.println("Olá, " + nome + "!"));
+
+// Output:
+// Olá, João!
+// Olá, Maria!
+// Olá, Pedro!
+// Olá, Ana!
+
+======
++ Collect: permite coletar os elementos da stream em uma 
+coleção ou em outro tipo de dado.
+List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+Set<Integer> numerosPares = numeros.stream()
+                                   .filter(n -> n % 2 == 0)
+                                   .collect(Collectors.toSet());
+
+System.out.println(numerosPares); // Output: [2, 4, 6, 8, 10]
+
+```
