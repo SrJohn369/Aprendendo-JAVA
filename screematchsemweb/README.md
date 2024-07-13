@@ -273,3 +273,330 @@ Set<Integer> numerosPares = numeros.stream()
 System.out.println(numerosPares); // Output: [2, 4, 6, 8, 10]
 
 ```
+## Alguns Assuntos
+```txt
+Padrões
+
+Os formatos de data e hora são especificados por strings padrão de data e hora, 
+a tabela a seguir mostra a sintaxe padrão que deve ser utilizada para o padrão de formatação:
+
+Letra	Componente data/hora	    Exemplo
+G	    Designador de era	        DC
+y	    Ano	                        2010; 10
+M	    Mês no ano	                Julho; jul; 10
+w	    Semana no ano	            27
+W	    Semana no mês	            2
+D	    Dia no ano	                189
+d	    Dia no mês	                10
+F	    Dia da semana no mês	    2
+E	    Dia na semana	            Terça-feira; ter
+a	    Marcador de am/pm	        PM
+H	    Hora no dia (0-23)	        0
+k	    Hora no dia (1-24)	        24
+K	    Hora em am/pm (0-11)	    0
+h	    Hora em am/pm (1-12)	    12
+m	    Minuto na hora	            30
+s	    Segundo no minuto	        55
+S	    Fração de um segundo	    978
+
+EXEMPLO:
+==================================================================================================
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Datas {
+
+    public static void main(String[] args) {
+
+        String pattern = "E, dd MMM yyyy HH:mm:ss z";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+        System.out.println(date);
+
+    }
+}
+==================================================================================================
+SAÍDA:  sáb., 19 nov. 2022 02:58:14 BRT”:
+
+LocalDate
+
+O LocalDate representa uma data. Uma data sem fuso horário no sistema de calendário 
+ISO-8601, tem como formato padrão yyyy-MM-dd. Essa classe não armazena ou representa 
+uma hora ou fuso horário. Em vez disso, é uma descrição da data, 
+normalmente usada para aniversários.
+
+Data atual
+
+Vamos utilizar o LocalDate para criar a data atual, a de hoje:
+==================================================================================================
+import java.time.LocalDate;
+
+public class Datas {
+
+    public static void main(String[] args) {
+
+        LocalDate hoje = LocalDate.now();
+        System.out.println(hoje);
+
+    }
+}
+==================================================================================================
+SAÍDA: 2022-11-19
+
+Criando datas
+
+Agora, vamos criar uma nova data para representar a data de um aniversário. 
+Para isso, importaremos o pacote java.time.month;
+==================================================================================================
+import java.time.LocalDate;
+import java.time.Month;
+
+public class Datas {
+    
+    public static void main(String[] args) {
+
+        LocalDate hoje = LocalDate.now();
+        System.out.println(hoje);
+
+        LocalDate aniversarioAlice = LocalDate.of(2005, Month.SEPTEMBER, 15);
+        System.out.println(aniversarioAlice);
+    }
+}
+==================================================================================================
+SAÍDA: 2005-09-15
+
+Também podemos brincar com esse código e calcular a idade atual da aniversariante. 
+Uma forma de fazer isso na mão seria subtraindo o método getYear das datas, dessa forma:
+==================================================================================================
+import java.time.LocalDate;
+import java.time.Month;
+
+public class Datas {
+    public static void main(String[] args) {
+        LocalDate hoje = LocalDate.now();
+        System.out.println(hoje);
+
+        LocalDate aniversarioAlice = LocalDate.of(2005, Month.SEPTEMBER, 15);
+        System.out.println(aniversarioAlice);
+
+        int idade =  hoje.getYear() - aniversarioAlice.getYear();
+        System.out.println(idade);
+    }
+
+}
+==================================================================================================
+SAÍDA: 
+2022-11-19
+2005-09-15
+17
+
+Período
+
+Ao executar esse código temos o resultado esperado, que neste caso é 17 anos. 
+Mas e se quiséssemos descobrir a diferença de dias e meses também? Daria pra fazer da 
+mesma forma utilizando o get, no entanto, existe algo pronto para nos ajudarmos. 
+Nesse caso, podemos utilizar a classe Period.
+
+Para saber a diferença entre duas datas podemos utilizar seu método between, da seguinte forma:
+==================================================================================================
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+
+public class Datas {
+    public static void main(String[] args) {
+        LocalDate hoje = LocalDate.now();
+        System.out.println(hoje);
+
+        LocalDate aniversarioAlice = LocalDate.of(2005, Month.SEPTEMBER, 15);
+        System.out.println(aniversarioAlice);
+
+        int idade = aniversarioAlice.getYear() - hoje.getYear();
+        System.out.println(idade);
+
+        Period periodo = Period.between(hoje, aniversarioAlice);
+        System.out.println(periodo);
+
+    }
+}
+==================================================================================================
+Repare que a saída desse nosso println vai ser um pouco estranha, um exemplo seria: P-17Y-2M-4D.
+
+Isso significa um período de 17 anos, 2 meses e 4 dias.
+
+LocalTime
+
+O local time representa um horário, seu formato padrão é hh:mm:ss.zzz.
+Horário atual
+
+Assim como fizemos com o LocalDate, dessa vez vamos imprimir o horário atual:
+==================================================================================================
+import java.time.LocalTime;
+
+public class Horarios {
+
+    public static void main(String[] args) {
+        LocalTime hoje = LocalTime.now();
+        System.out.println(hoje);
+    }
+}
+==================================================================================================
+SAÍDA: Perceba o resultado é a data atual no formato hh:mm:ss.zzz:
+
+06:02:21.029460400
+
+Criando horários
+
+Agora, vamos criar um novo horário para representar as horas em que Alice nasceu:
+==================================================================================================
+import java.time.LocalTime;
+
+public class Horarios {
+
+    public static void main(String[] args) {
+        LocalTime hoje = LocalTime.now();
+        System.out.println(hoje);
+
+        LocalTime aniversarioHoraAlice = LocalTime.of(22, 33, 15);
+        System.out.println(aniversarioHoraAlice);
+    }
+}
+==================================================================================================
+O resultado será no formato hh:mm:ss, pois colocamos dessa forma no LocalTime.of() :
+
+22:33:15 
+
+LocalDateTime
+Horário e data atual
+
+O LocalDateTime representa uma data com a hora, visto como ano-mês-dia-hora-minuto-segundo. 
+O tempo é representado como yyyy-MM-dd-HH-mm-ss.zzz.
+==================================================================================================
+import java.time.LocalDateTime;
+
+public class DataHorario {
+
+    public static void main(String[] args) {
+        LocalDateTime hoje = LocalDateTime.now();
+        System.out.println(hoje);
+    }
+}
+==================================================================================================
+Resultado:
+
+2022-11-19T04:11:17.108565200
+
+DateTimeFormatter
+
+Você deve ter notado que os resultados estão em formatos que não estamos acostumados a trabalhar. 
+Podemos então trabalhar com diversos formatadores de datas existentes!
+
+Exemplos de formatos de data e hora:
+Formato	                        Exemplo
+MM/dd/yyyy	                    19/11/2022
+dd-M-yyyy hh:mm:ss	            19-11-22 12:07:23
+dd MMMM yyyy	                19 de novembro de 2022
+dd MMMM yyyy zzzz	            19 de novembro de 2022, Horário Padrão de Brasília
+E, dd MMM yyyy HH:mm:ss z	    Sáb, 19 de novembro de 2022, 12:07:23 BRT
+
+Além disso, também podemos mudar a forma de exibir o mês. Se utilizarmos letras em quantidades diferentes, 
+consequentemente o resultado também é. Vejamos:
+
+Tipo	        Padrão	        Exemplo
+Mês completo	MMMM	        Setembro
+Mês abreviado	MMM	            Set.
+Mês numérico	MM	            09
+
+Para formatarmos, vamos utilizar o DateTimeFormatter. Existem diversos já prontos, 
+mas há ainda a alternativa de você criar o seu próprio formato no padrão já conhecido de dd/MM/yyyy hh:mm:ss.
+
+Para fazer isso basta você utilizar o método ofPattern. Como vimos nas tabelas anteriores, 
+podemos escolher como será impresso.
+==================================================================================================
+DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+==================================================================================================
+Agora podemos a partir da nossa data, neste caso hoje, chamar o método format passando esse formatador:
+
+==================================================================================================
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Formatando {
+
+    public static void main(String[] args) {
+        LocalDateTime hoje = LocalDateTime.now();
+        System.out.println(hoje);
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+        LocalDateTime agora = LocalDateTime.now();
+        System.out.println(hoje.format(formatador));
+
+    }
+}
+==================================================================================================
+Agora sim, ao executar temos o resultado:
+
+19/11/2022 04:38:11
+
+
+Como temos estudado no curso, Streams nos permitem manipular coleções de elementos (como Lists ou Sets) 
+de forma mais sofisticada e eficiente do que os métodos tradicionais. Eles são especialmente úteis quando 
+precisamos realizar operações em massa nesses elementos, como filtrar, transformar ou agregar.
+
+E a função Peek, o que é?
+
+A função”peek” é uma operação intermediária de uma stream. Uma operação intermediária é aquela que 
+processa os dados da stream, mas não a finaliza, ou seja, ela permite que mais operações sejam feitas 
+depois dela. A função peek é usada para "espiar" os elementos da stream sem alterá-los, o que pode ser muito 
+útil para depuração. Essa função vai receber cada elemento da stream e realizar alguma operação de efeito 
+colateral (como imprimir o elemento), mas vai devolver o mesmo elemento sem alterar nada.
+
+Por que eu deveria usar isso?
+
+O uso de Streams e a função peek podem te ajudar a escrever códigos mais elegantes, fáceis de ler, e diminuir a 
+possibilidade de erros. Além disso, eles podem fazer seu código rodar mais rápido em certos casos, pois os 
+Streams permitem a paralelização das operações, ou seja, executar várias operações ao mesmo tempo.
+
+Exemplos de código
+
+Vamos ver agora um exemplo simples de como podemos usar a função peek com streams. Imagine que temos uma 
+lista com números e queremos multiplicar cada um deles por 2 e depois somar os resultados.
+
+List<Integer> numeros = Arrays.asList(1, 2, 3, 4, 5);
+
+int soma = numeros.stream()
+                .peek(n -> System.out.println("Elemento: " + n))
+                .map(n -> n * 2)
+                .peek(n -> System.out.println("Conteúdo depois do map: " + n))
+                .reduce(0, (total, numero) -> total + numero);
+
+System.out.println("A soma dos números é: " + soma);
+
+Nesse código, nós criamos uma stream com a lista de números, espiamos cada número para imprimir 
+(com a função.peek), multiplicamos o valor por dois, espiamos também para conferir o valor da 
+multiplicação e depois somamos os resultados.
+
+Veja como aparece no terminal após a execução da aplicação:
+
+Elemento: 1
+Conteúdo depois do map: 2
+Elemento: 2
+Conteúdo depois do map: 4
+Elemento: 3
+Conteúdo depois do map: 6
+Elemento: 4
+Conteúdo depois do map: 8
+Elemento: 5
+Conteúdo depois do map: 10
+A soma dos números é: 30
+
+Process finished with exit code 0
+
+Isso nos ajuda a ter certeza de que o processo está sendo feito corretamente. Aqui conseguimos perceber 
+que a soma dos números 2 + 4 + 6 + 8 + 10 foi calculada corretamente, resultando em 30. Ou seja, a função 
+lambda em nosso método reduce está fazendo exatamente o que era planejado. E pudemos conferir isso, com o peek.
+
+Esse é apenas um exemplo básico, mas lembre-se que a função peek pode ser usada em qualquer lugar dentro da sua stream,
+sempre que você quiser ver quais elementos estão passando por aquele ponto.
+
+```
